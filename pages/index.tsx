@@ -1,9 +1,9 @@
-import { Web3sdkioNftMedia, useAddress } from "@web3sdkio/react";
+import { ThirdwebNftMedia, useAddress } from "@thirdweb-dev/react";
 import type { NextPage } from "next";
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
-import { useMagic } from "@web3sdkio/react/evm/connectors/magic";
-import { NFTMetadata } from "@web3sdkio/sdk";
+import { useMagic } from "@thirdweb-dev/react/evm/connectors/magic";
+import { NFTMetadata } from "@thirdweb-dev/sdk";
 
 const Home: NextPage = () => {
   const connectWithMagic = useMagic(); // Hook to connect with Magic Link.
@@ -57,7 +57,7 @@ const Home: NextPage = () => {
             {mintedNft && (
               <div>
                 <h3>Your Minted NFT</h3>
-                <Web3sdkioNftMedia
+                <ThirdwebNftMedia
                   metadata={mintedNft}
                   style={{
                     width: 300,

@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app";
-import { ChainId, Web3sdkioProvider } from "@web3sdkio/react";
+import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 import "../styles/globals.css";
-import { MagicConnector } from "@web3sdkio/react/evm/connectors/magic";
+import { MagicConnector } from "@thirdweb-dev/react/evm/connectors/magic";
 
 const magicLinkConnector = new MagicConnector({
   options: {
@@ -17,12 +17,12 @@ const activeChainId = ChainId.Mumbai;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Web3sdkioProvider
+    <ThirdwebProvider
       desiredChainId={activeChainId}
       walletConnectors={[magicLinkConnector]}
     >
       <Component {...pageProps} />
-    </Web3sdkioProvider>
+    </ThirdwebProvider>
   );
 }
 

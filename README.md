@@ -15,7 +15,7 @@ For the full guide, check out our [YouTube video](https://www.youtube.com/watch?
 Create a copy of this template by running the following command:
 
 ```bash
-npx web3sdkio@latest create --template reddit
+npx thirdweb@latest create --template reddit
 ```
 
 Set yourself up with a [Magic.Link](https://magic.link/) account, and create a new project.
@@ -26,7 +26,7 @@ Add your Magic Link **public** API key to the `.env.local` file:
 NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY=YOUR_API_KEY=xxx
 ```
 
-In this project, we use environment variables to store our private key [(not recommended)](https://portal.web3sdk.io/sdk/set-up-the-sdk/securing-your-private-key).
+In this project, we use environment variables to store our private key [(not recommended)](https://portal.thirdweb.com/sdk/set-up-the-sdk/securing-your-private-key).
 Inside `.env.local`, add your private key:
 
 ```text
@@ -41,7 +41,7 @@ Below, we'll explore the key areas of this template.
 
 We use [Magic.Link](https://magic.link/) to create a seamless user experience for onboarding web2 users into the NFT world.
 
-In the [\_app.tsx](/pages/_app.tsx) page, we set up the Magic Link wallet connector in the `Web3sdkioProvider`:
+In the [\_app.tsx](/pages/_app.tsx) page, we set up the Magic Link wallet connector in the `ThirdwebProvider`:
 
 ```tsx
 const magicLinkConnector = new MagicConnector({
@@ -58,12 +58,12 @@ const activeChainId = ChainId.Mumbai;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Web3sdkioProvider
+    <ThirdwebProvider
       desiredChainId={activeChainId}
       walletConnectors={[magicLinkConnector]}
     >
       <Component {...pageProps} />
-    </Web3sdkioProvider>
+    </ThirdwebProvider>
   );
 }
 ```
@@ -100,13 +100,13 @@ With an `input` field to enter their email, and a button to connect with Magic L
 
 ### Minting NFTs.
 
-We mint NFTs from the [NFT Drop](https://portal.web3sdk.io/pre-built-contracts/nft-drop) from the admin wallet in an API route called [mint-nft.ts](/pages/api/mint-nft.ts).
+We mint NFTs from the [NFT Drop](https://portal.thirdweb.com/pre-built-contracts/nft-drop) from the admin wallet in an API route called [mint-nft.ts](/pages/api/mint-nft.ts).
 
 This way, the user never accepts a transaction or needs to pay gas fees:
 
 ```tsx
 // Boilerplate Nextjs API route with TypeScript
-import { Web3sdkioSDK } from "@web3sdkio/sdk";
+import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -117,10 +117,10 @@ export default async function handler(
     // 1. Grab the address from the request body
     const { address } = req.body;
 
-    // 2. Let's instantiate the web3sdkio SDK using our private key.
-    const sdk = Web3sdkioSDK.fromPrivateKey(
+    // 2. Let's instantiate the thirdweb SDK using our private key.
+    const sdk = ThirdwebSDK.fromPrivateKey(
       // Learn more about securely accessing your private key:
-      // https://portal.web3sdk.io/sdk/set-up-the-sdk/securing-your-private-key
+      // https://portal.thirdweb.com/sdk/set-up-the-sdk/securing-your-private-key
       process.env.PRIVATE_KEY as string,
       "mumbai" // configure this to your network
     );
@@ -175,7 +175,7 @@ And display it on the UI:
   {mintedNft && (
     <div>
       <h3>Your Minted NFT</h3>
-      <Web3sdkioNftMedia
+      <ThirdwebNftMedia
         metadata={mintedNft}
         style={{
           width: 300,
@@ -189,4 +189,4 @@ And display it on the UI:
 
 ## Got Questions?
 
-Join our [Discord](https://discord.com/invite/web3sdkio) to speak with our team directly.
+Join our [Discord](https://discord.com/invite/thirdweb) to speak with our team directly.
