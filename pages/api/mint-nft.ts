@@ -1,5 +1,5 @@
 // Boilerplate Nextjs API route with TypeScript
-import { ThirdwebSDK } from "@thirdweb-dev/sdk";
+import { Web3sdkioSDK } from "@web3sdkio/sdk";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -10,10 +10,10 @@ export default async function handler(
     // 1. Grab the address from the request body
     const { address } = req.body;
 
-    // 2. Let's instantiate the thirdweb SDK using our private key.
-    const sdk = ThirdwebSDK.fromPrivateKey(
+    // 2. Let's instantiate the web3sdkio SDK using our private key.
+    const sdk = Web3sdkioSDK.fromPrivateKey(
       // Learn more about securely accessing your private key:
-      // https://portal.thirdweb.com/sdk/set-up-the-sdk/securing-your-private-key
+      // https://docs.web3sdk.io/sdk/set-up-the-sdk/securing-your-private-key
       process.env.PRIVATE_KEY as string,
       "mumbai" // configure this to your network
     );
